@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigFix Ops Studio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css" integrity="sha512-uf06llspW44/LZpHzHT6qBOIVODjWtv4MxCricRxkzvopAlSWnTf6hpZTFxuuZcuNE9CBQhqE0Seu1CoRk84nQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js" integrity="sha512-sSWQXoxIkE0G4/xqLngx5C53oOZCgFRxWE79CvMX2X0IKx14W3j9Dpz/2MpRh58xb2W/h+Y4WAHJQA0qMMuxJg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/matchbrackets.min.js" integrity="sha512-GSY5GzHj8In2X0hGqZZhT8RIt17Q1nN3H/Z1qgGzPj2Xy7Eea1EwQ1Ewa8HwR17A/zE1S2yof2kHkG1F3R9Ghw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/selection/active-line.min.js" integrity="sha512-0sCE4A1Z7Akm2AgtcT1EnyV/G1c3j5r5r5/KzGzO/m0y1v8EUq3wU3EwU/U2SXXn71vB20y00+i2k8L+U2g/wA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.css" integrity="sha512-OmcLQEy8iWqxGg5bA+2uK981qT1zQePzM8+Q8oQ2nL2Q1R0O0P+Tf/s+d9hZ6k0q1W5o+B09w7A8O3N8s4W8/Q==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/hint/show-hint.min.js" integrity="sha512-25gJgP1z2I0I0k4E8A8P0D1l+Jg1Z/x3A1N8Ew20oR1P11hF0D0S82Q1u4Q8t2n1R9W220mP55M5K5L2h8F0qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <script src="dompurify.min.js"></script>
+</head>
+<body>
+
+<aside class="library-pane" id="library-pane">
+    <div class="sidebar-logo">BigFix Ops Studio</div>
+    <div class="lib-search">
+        <div class="lib-search-wrapper">
+            <input type="text" id="lib-search-input" placeholder="Search expressions..." oninput="Sys.Library.filter()">
+            <button class="search-clear" id="search-clear-btn" onclick="Sys.Library.clearSearch()" title="Clear search">✖</button>
+        </div>
+    </div>
+    <div class="lib-toolbar">
+        <span onclick="Sys.Library.expandAll()" onkeydown="if(event.key==='Enter' || event.key===' ') Sys.Library.expandAll()" tabindex="0" role="button" title="Expand all menus"> Expand All</span>
+        <span onclick="Sys.Library.collapseAll()" onkeydown="if(event.key==='Enter' || event.key===' ') Sys.Library.collapseAll()" tabindex="0" role="button" title="Collapse all menus"> Collapse All</span>
+    </div>
+    <div class="lib-content-scroll" id="lib-content"></div>
+</aside>
+
+<div class="sidebar-resizer" id="sidebar-drag-horiz"></div>
+
+<div class="main-wrapper">
+    <header class="topbar">
+        <div class="dropdown context-selector-wrap" id="context-dropdown-wrap">
+            <button class="context-selector" onclick="Sys.toggleDrop('context-drop', event)" id="context-btn">
+                Client Relevance
+                <svg class="context-selector-caret" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 6 8 10 12 6"></polyline></svg>
+            </button>
+            <div class="dropdown-menu" id="context-drop" style="width:100%; padding: 6px;">
+                <button class="drop-item ctx-item active" onclick="Sys.Studio.switchMode('client-relevance', 'Client Relevance', event)">Client Relevance</button>
+                <button class="drop-item ctx-item" onclick="Sys.Studio.switchMode('session-relevance', 'Session Relevance', event)">Session Relevance</button>
+                <button class="drop-item ctx-item" onclick="Sys.Studio.switchMode('action-script', 'Action Script', event)">Action Script</button>
+            </div>
+        </div>
+        
+        <div class="header-actions">
+            <button class="btn btn-ai" onclick="Sys.Chat.toggle()" title="Toggle AI Assistant" style="position:relative;">
+                <span style="position:absolute; top:-6px; right:-6px; background:#f59e0b; color:#fff; font-size:9px; padding:2px 6px; border-radius:10px; font-weight:600; letter-spacing:0.05em;">BETA</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg> AI Assistant
+            </button>
+            
+            <button class="btn btn-outline" onclick="Sys.QNA.clear()" title="Clear Editor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path></svg> Clear
+            </button>
+            
+            <button class="btn btn-primary" id="btn-evaluate" onclick="Sys.QNA.evaluate()" title="Evaluate Relevance (Ctrl+Enter)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg> Evaluate
+            </button>
+        </div>
+    </header>
+
+    <main class="workspace-pane">
+        <div class="panel-card editor-container" id="editor-pane">
+            <div class="panel-header">
+                Expression Editor
+                <div class="panel-header-actions">
+                    <button class="btn btn-outline" style="padding: 6px 12px; font-size:12px;" onclick="Sys.Library.saveSnippet()" title="Save to My Bookmarks">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg> Bookmark
+                    </button>
+                </div>
+            </div>
+            <div id="qna-editor-wrapper" style="flex:1; display:flex; flex-direction:column; min-height:0;"></div>
+        </div>
+
+        <div class="drag-handle-vertical" id="drag-handle-vert"></div>
+
+        <div class="panel-card results-container">
+            <div class="panel-header">
+                Evaluation Results
+                <div class="panel-header-actions">
+                    <div style="position: relative; display: flex; align-items: center;">
+                        <input type="text" class="res-filter-input" id="res-filter" style="padding-right: 30px;" placeholder="Search answers..." oninput="Sys.QNA.filterResults()">
+                        <button class="search-clear" id="res-search-clear-btn" onclick="Sys.QNA.clearSearch()" title="Clear search">✖</button>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-outline" style="padding: 8px 12px; border-color: var(--border-focus);" onclick="Sys.toggleDrop('exp-drop', event)">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg> Export
+                        </button>
+                        <div class="dropdown-menu" id="exp-drop" style="width:280px; padding:16px; right: 0; left: auto;">
+                            <div class="drop-header" style="background:transparent; padding:0 0 10px 0;">Format</div>
+                            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px;">
+                                <button class="fmt-btn active" onclick="Sys.Exp.setFmt('csv', this)">CSV</button>
+                                <button class="fmt-btn" onclick="Sys.Exp.setFmt('pdf', this)">PDF</button>
+                                <button class="fmt-btn" onclick="Sys.Exp.setFmt('html', this)">HTML</button>
+                                <button class="fmt-btn" onclick="Sys.Exp.setFmt('txt', this)">TXT</button>
+                                <button class="fmt-btn" onclick="Sys.Exp.setFmt('json', this)">JSON</button>
+                                <button class="fmt-btn" onclick="Sys.Exp.setFmt('xml', this)">XML</button>
+                            </div>
+                            <div class="drop-header" style="background:transparent; padding:0 0 10px 0; border-top:1px solid var(--border-light); padding-top:16px;">Scope</div>
+                            <button class="drop-item" style="padding:8px 8px; border-radius:4px;" onclick="Sys.Exp.run('search')">Search Results</button>
+                            <button class="drop-item" style="padding:8px 8px; border-radius:4px;" onclick="Sys.Exp.run('all')">All Results</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-content" id="qna-results"></div>
+        </div>
+    </main>
+
+    <aside class="chat-pane" id="chat-pane">
+        <div class="panel-header">
+            AI Assistant
+            <div style="display:flex;align-items:center;gap:4px;">
+                <!-- AI Settings gear button — opens provider/key modal -->
+                <button class="chat-header-btn" id="ai-settings-btn" title="AI Settings" onclick="Sys.AISettings.open()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+                <!-- Close chat pane button -->
+                <button class="chat-header-btn chat-close-btn" title="Close" onclick="Sys.Chat.toggle()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="chat-bubble bot">Hello! I'm your <strong>AI Assistant</strong>. I can help you:<br><br>
+- Write scripts and expressions<br>
+- Debug syntax errors<br>
+- Explain complex code using SmartSense<br>
+- Suggest optimizations for your use case<br><br>
+What do you need help with today?</div>
+        </div>
+        <div class="chat-input-wrapper">
+            <textarea id="chat-input" placeholder="e.g. relevance for os details..." rows="1"
+                onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); Sys.Chat.send(); }"
+                style="flex:1; padding:8px 12px; border:1px solid var(--border-light); border-radius:4px; font-size:13px; outline:none; font-family:'Inter', sans-serif;; resize:none; overflow-y:hidden; max-height:120px; line-height:1.4; height:36px; display:block; vertical-align:middle;"></textarea>
+            <button class="btn btn-primary" onclick="Sys.Chat.send()">Send</button>
+        </div>
+    </aside>
+</div>
+
+<!--
+  ── AI Settings Modal ─────────────────────────────────────────────────────
+  Built entirely with DOM APIs in app.js (Sys.AISettings.open).
+  This placeholder div is the mount point; the modal itself is injected once
+  on first open so the DOM is never pre-populated with stale provider data.
+-->
+<div id="ai-settings-modal-root"></div>
+
+
+<div id="toast-container"></div>
+<script>
+    const __INJECT_LIBRARY_JSON__ = __LIBRARY_PAYLOAD__;
+    const __INJECT_INSPECTORS_JSON__ = __INSPECTORS_PAYLOAD__;
+</script>
+<script src="app.js"></script>
+
+<script>
+// ── AI config-error interceptor ─────────────────────────────────────────────
+// Wraps the /chat fetch so that when the backend returns config_error:true
+// (no provider set, or no API key), we show a clear setup message instead of
+// the raw Python error string.
+(function() {
+  const _origFetch = window.fetch;
+  window.fetch = async function(url, opts) {
+    const res = await _origFetch.call(this, url, opts);
+    if (url === '/chat' && res.ok) {
+      const clone = res.clone();
+      const json  = await clone.json();
+      if (json && json.config_error) {
+        // Return a fake Response whose .json() surfaces a user-friendly reply
+        const msg = formatConfigError(json.state, json.message);
+        const fakeBody = JSON.stringify({ reply: msg });
+        return new Response(fakeBody, {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    }
+    return res;
+  };
+
+  function formatConfigError(state, message) {
+    if (state === 'no_provider') {
+      return (
+        'No AI provider configured.\n\n' +
+        'Click the Settings icon in the AI Assistant panel header to select a provider and enter your API key.'
+      );
+    }
+    if (state === 'no_key') {
+      const m = message || '';
+      const provMatch = m.match(/"(\w+)" is selected/);
+      const provider  = provMatch ? provMatch[1] : 'the selected provider';
+      return (
+        'API key missing for provider "' + provider + '".\n\n' +
+        'Click the Settings icon in the AI Assistant panel header to enter your API key.'
+      );
+    }
+    return (message || 'AI is not configured.') + '\n\nClick the Settings icon to configure your API key.';
+  }
+
+  // Also check on startup and show a banner if AI is not ready
+  window.addEventListener('load', async () => {
+    try {
+      const res  = await _origFetch('/config-status');
+      const data = await res.json();
+      if (!data.ready) {
+        // Wait briefly for the chat pane to be in the DOM
+        setTimeout(() => {
+          const msgs = document.getElementById('chat-messages');
+          if (!msgs) return;
+          // Replace the existing welcome bubble with the setup banner
+          // so the banner doesn't render alongside it (which would confuse users)
+          const existing = msgs.querySelector('.chat-bubble.bot');
+          const banner = document.createElement('div');
+          banner.className = 'chat-bubble bot';
+          // SEC-FIX: state/provider are backend enum values; escape them before use in renderConfigBanner
+          const _safeState    = String(data.state    || '').replace(/[<>"'&]/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
+          const _safeProvider = String(data.provider || '').replace(/[<>"'&]/g, c => ({'<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#x27;','&':'&amp;'}[c]));
+          banner.innerHTML = renderConfigBanner(_safeState, _safeProvider);
+          if (existing) {
+            msgs.replaceChild(banner, existing);
+          } else {
+            msgs.prepend(banner);
+          }
+        }, 800);
+      }
+    } catch(e) { /* backend not yet ready — ignore */ }
+  });
+
+  // cmdBox removed — CLI command instructions replaced by settings gear prompt
+
+  function renderConfigBanner(state, provider) {
+    // Build the gear SVG icon inline so there is no emoji or unicode dependency
+    const gearSVG = (
+      '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" ' +
+      'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ' +
+      'style="vertical-align:middle;margin:0 3px 2px 3px;">' +
+      '<circle cx="12" cy="12" r="3"></circle>' +
+      '<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06' +
+      'a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09' +
+      'A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06' +
+      'A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09' +
+      'A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06' +
+      'A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09' +
+      'a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06' +
+      'A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>' +
+      '</svg>'
+    );
+    const settingsHint = (
+      '<div style="margin-top:10px;padding:10px 12px;background:#F0F7FF;' +
+      'border:1px solid #BFDBFE;border-radius:6px;font-size:12px;color:#1D4ED8;line-height:1.6;">' +
+      'Click the ' + gearSVG + ' <strong>Settings</strong> icon in the panel header above to choose a provider and enter your API key.' +
+      '</div>'
+    );
+    if (state === 'no_provider') {
+      return (
+        '<strong>Welcome to BigFix Ops Studio!</strong><br><br>' +
+        'The AI Assistant needs an API key to get started.' +
+        settingsHint
+      );
+    }
+    if (state === 'no_key') {
+      return (
+        '<strong>API key missing for &quot;' + provider + '&quot;</strong><br><br>' +
+        'The selected provider needs an API key.' +
+        settingsHint
+      );
+    }
+    return '<strong>AI not configured.</strong>' + settingsHint;
+  }
+})();
+</script>
+</body>
+</html>

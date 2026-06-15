@@ -1,0 +1,313 @@
+{
+    "Client Relevance": {
+        "Operating System": [
+            {
+                "title": "Basic OS Name",
+                "desc": "Retrieves the simple name of the operating system",
+                "code": "name of operating system"
+            },
+            {
+                "title": "Basic OS Version",
+                "desc": "Retrieves the version of the operating system",
+                "code": "version of operating system"
+            },
+            {
+                "title": "Basic OS Architecture",
+                "desc": "Checks the architecture of the operating system (e.g., x86_64, i386)",
+                "code": "architecture of operating system"
+            },
+            {
+                "title": "System Uptime",
+                "desc": "Retrieves the current uptime of the machine",
+                "code": "uptime of operating system"
+            },
+            {
+                "title": "OS Identification & Build Forensics",
+                "desc": "Core OS identity including versions, high/low build components, and release IDs",
+                "code": "(name of it | \"None\", version of it as string | \"None\", build number of it as string | \"None\", build number high of it | 0, build number low of it | 0, release of it as string | \"None\", releaseid of it | \"None\", display name of it | \"None\", display version of it | \"None\") of operating system"
+            },
+            {
+                "title": "OS Platform & Architecture Flags",
+                "desc": "Boolean classification for platform types and architectural bitness",
+                "code": "(architecture of it | \"None\", (windows of it | false, linux of it | false, mac of it | false, unix of it | false, embedded of it | false), (x32 of it | false, x64 of it | false, ia64 of it | false), major version of it | 0, minor version of it | 0, platform id of it | 0) of operating system"
+            },
+            {
+                "title": "OS Service, Tech Level & Security",
+                "desc": "CSD versions, service pack details, and suite/product masking",
+                "code": "(csd version of it | \"None\", service pack major version of it | 0, service pack minor version of it | 0, suite mask of it as string | \"None\", product info numeric of it | 0, product info string of it | \"None\") of operating system"
+            },
+            {
+                "title": "System Performance & Runtime State",
+                "desc": "Uptime metrics, hypervisor identification, and performance counter frequencies",
+                "code": "(boot time of it as string | \"None\", uptime of it as string | \"None\", hypervisor of it | \"None\", virtual machine of it | false, uuid of it as string | \"None\", performance counter of it | 0, performance counter frequency of it as string | \"None\", (big endian of it | false, little endian of it | false)) of operating system"
+            }
+        ],
+        "Processor": [
+            {
+                "title": "Processor Brand String",
+                "desc": "Retrieves the human-readable brand name of the processor",
+                "code": "brand string of main processor"
+            },
+            {
+                "title": "Processor Speed",
+                "desc": "Retrieves the speed of the main processor",
+                "code": "speed of main processor"
+            },
+            {
+                "title": "Processor ID & Branding",
+                "desc": "Vendor identification, brand strings, and hardware revision/stepping details",
+                "code": "(brand string of it | \"None\", vendor name of it | \"None\", family name of it | \"None\", family of it as string | \"None\", model of it as string | \"None\", stepping of it | 0, brand id of it | 0, vendor name of it | \"None\") of main processor"
+            }
+        ],
+        "Processes": [
+            {
+                "title": "List Process Names",
+                "desc": "Returns a simple list of all running process names",
+                "code": "names of processes"
+            },
+            {
+                "title": "List Process PIDs",
+                "desc": "Returns a simple list of all running process IDs",
+                "code": "pids of processes"
+            },
+            {
+                "title": "Check Specific Process",
+                "desc": "Checks if a specific process is currently running",
+                "code": "exists process \"explorer.exe\""
+            },
+            {
+                "title": "Process Core Identity",
+                "desc": "Name, PID, Parent PID, and session ID",
+                "code": "(name of it | \"None\", pid of it | 0, ppid of it | 0, session id of it | 0) of processes"
+            },
+            {
+                "title": "Process Resource & Memory Forensics",
+                "desc": "Handle counts, working set sizes, and page fault metrics",
+                "code": "(working set size of it | 0, peak working set size of it | 0, page fault count of it | 0, page file usage of it | 0, peak page file usage of it | 0, handle count of it | 0, gdi object count of it | 0, user object count of it | 0) of processes"
+            },
+            {
+                "title": "Process Security & Execution Flags",
+                "desc": "User context, WOW64 status, and hardware security (DEP/NX), plus timing",
+                "code": "(user of it as string | \"None\", (wow64 of it | false, dep enabled of it | false, nx bit of it | false), creation time of it as string | \"None\", user time of it as string | \"None\", kernel time of it as string | \"None\") of processes"
+            },
+            {
+                "title": "Process I/O Statistics",
+                "desc": "Detailed read/write/other I/O operation counts and total sizes",
+                "code": "(name of it | \"None\", io read count of it | 0, io read size of it | 0, io write count of it | 0, io write size of it | 0, io other count of it | 0, io other size of it | 0) of processes"
+            }
+        ],
+        "Services": [
+            {
+                "title": "List Service Names",
+                "desc": "Returns a list of all service names on the system",
+                "code": "service names of services"
+            },
+            {
+                "title": "List Running Services",
+                "desc": "Returns a list of services that are currently running",
+                "code": "service names of services whose (running of it)"
+            },
+            {
+                "title": "Specific Service State",
+                "desc": "Returns the current state of a named service",
+                "code": "state of service \"Winmgmt\""
+            },
+            {
+                "title": "Service Config & Interaction",
+                "desc": "Operational state, start types, and desktop interaction capability",
+                "code": "(service name of it | \"None\", display name of it | \"None\", state of it | \"None\", start type of it | \"None\", login account of it | \"None\", (can interact with desktop of it | false, running of it | false, win32 type of it | false, driver type of it | false)) of services"
+            },
+            {
+                "title": "Service Runtime Forensics",
+                "desc": "PID, binary path, and system exit codes for troubleshooting",
+                "code": "(pid of it | 0, image path of it | \"None\", checkpoint of it | 0, win32 exit code of it | 0, service specific exit code of it | 0, version of it as string | \"None\") of services"
+            },
+            {
+                "title": "Service Security & Files",
+                "desc": "Security descriptor ownership and associated service executable file",
+                "code": "(service name of it | \"None\", owner of security descriptor of it as string | \"None\", group of security descriptor of it as string | \"None\", pathname of file of it | \"None\") of services"
+            }
+        ],
+        "Drives & Storage": [
+            {
+                "title": "List Drive Names",
+                "desc": "Returns a simple list of all drive letters/names",
+                "code": "names of drives"
+            },
+            {
+                "title": "Free Space on C: Drive",
+                "desc": "Returns the free space in bytes for the C: drive",
+                "code": "free space of drive \"C:\""
+            },
+            {
+                "title": "Total Space on C: Drive",
+                "desc": "Returns the total capacity in bytes for the C: drive",
+                "code": "total space of drive \"C:\""
+            },
+            {
+                "title": "Drive Identity & Logic",
+                "desc": "Volume names, file system types, and numeric type classification",
+                "code": "(name of it | \"None\", type of it | \"None\", numeric type of it | 0, volume of it | \"None\", file system type of it | \"None\") of drives"
+            },
+            {
+                "title": "Drive Filesystem Feature Flags",
+                "desc": "Advanced support flags for encryption, ACLs, quotas, and compression",
+                "code": "(name of it | \"None\", (fs_case_sensitive of it | false, fs_case_is_preserved of it | false, fs_persistent_acls of it | false, fs_unicode_stored_on_disk of it | false), (file_supports_encryption of it | false, file_supports_sparse_files of it | false, file_supports_reparse_points of it | false, file_supports_object_ids of it | false), (fs_vol_is_compressed of it | false, file_volume_quotas of it | false)) of drives"
+            },
+            {
+                "title": "Drive Capacity & Metrics",
+                "desc": "Total vs Free space byte counts and calculated utilization percentage",
+                "code": "(name of it | \"None\", total space of it | 0, free space of it | 0, (((free space of it * 100) / total space of it) as string & \"%25\") | \"0%25\") of drives"
+            }
+        ],
+        "Registry": [
+            {
+                "title": "Check if Registry Key Exists",
+                "desc": "Simply checks for the existence of a specific registry key",
+                "code": "exists key \"HKLM\\SOFTWARE\\BigFix\" of registry"
+            },
+            {
+                "title": "Get Specific Registry Value",
+                "desc": "Retrieves the data of a specific registry value",
+                "code": "(value \"ProgramPath\" of it as string | \"None\") of key \"HKLM\\SOFTWARE\\BigFix\\EnterpriseClient\" of registry"
+            },
+            {
+                "title": "Registry Key Meta-Data",
+                "desc": "Path, last write time (for change detection), and WOW64 redirection context",
+                "code": "(name of it | \"None\", pathname of it | \"None\", last write time of it as string | \"None\", (wow64 of it | false)) of keys \"HKLM\\SOFTWARE\\BigFix\\EnterpriseClient\" of registry"
+            },
+            {
+                "title": "Registry Key Security",
+                "desc": "Security descriptor analysis including owner and DACL/SACL presence",
+                "code": "(name of it | \"None\", owner of security descriptor of it as string | \"None\", group of security descriptor of it as string | \"None\", null dacl of security descriptor of it | false, null sacl of security descriptor of it | false) of keys \"HKLM\\SOFTWARE\\BigFix\\EnterpriseClient\" of registry"
+            },
+            {
+                "title": "Registry Value Deep Dive",
+                "desc": "Inspection of value data, types (REG_SZ/DWORD), and sizes",
+                "code": "(name of it | \"None\", it as string | \"None\", type of it as string | \"None\", size of it | 0) of values of keys \"HKLM\\SOFTWARE\\BigFix\\EnterpriseClient\" of registry"
+            }
+        ],
+        "Files & Folders": [
+            {
+                "title": "Check if File Exists",
+                "desc": "Verifies the existence of a file by its exact path",
+                "code": "exists file \"C:\\Windows\\System32\\cmd.exe\""
+            },
+            {
+                "title": "Get File Size",
+                "desc": "Returns the size of a specific file in bytes",
+                "code": "size of file \"C:\\Windows\\System32\\cmd.exe\""
+            },
+            {
+                "title": "Check if Folder Exists",
+                "desc": "Verifies the existence of a directory",
+                "code": "exists folder \"C:\\Windows\""
+            },
+            {
+                "title": "File Forensic Block",
+                "desc": "File size, versioning, and cryptographic hashes",
+                "code": "(name of it | \"None\", size of it | 0, version of it as string | \"None\", product version of it as string | \"None\", md5 of it | \"None\", sha1 of it | \"None\", sha256 of it | \"None\") of files \"mshtml.dll\" of system folder"
+            },
+            {
+                "title": "File Timing & Security",
+                "desc": "Full path, modification times, and ACL/Owner info",
+                "code": "(pathname of it | \"None\", modification time of it as string | \"None\", owner of security descriptor of it as string | \"None\", group of security descriptor of it as string | \"None\") of files \"mshtml.dll\" of system folder"
+            },
+            {
+                "title": "Folder Hierarchy & Security",
+                "desc": "Parent directory relationship and security descriptor integrity",
+                "code": "(pathname of it | \"None\", name of parent folder of it | \"None\", owner of security descriptor of it as string | \"None\", null dacl of security descriptor of it | false) of (windows folder; system folder)"
+            }
+        ],
+        "Applications": [
+            {
+                "title": "List Registered Apps",
+                "desc": "Returns a simple list of registered application executable names",
+                "code": "names of regapps"
+            },
+            {
+                "title": "Get Version of Specific App",
+                "desc": "Retrieves the version string of a specific registered application",
+                "code": "version of regapp \"chrome.exe\""
+            },
+            {
+                "title": "Application Object Audit",
+                "desc": "Registered application details, task names, and virtualizer contexts",
+                "code": "(name of it | \"None\", version of it as string | \"None\", task name of it | \"None\", virtualizer of it | \"None\", (inspectability of it | false)) of regapps"
+            }
+        ],
+        "Users & Groups": [
+            {
+                "title": "Current Logged-in User",
+                "desc": "Retrieves the name of the currently logged-in user",
+                "code": "name of current user"
+            },
+            {
+                "title": "List Local Users",
+                "desc": "Returns a simple list of all local user accounts",
+                "code": "names of local users"
+            },
+            {
+                "title": "Check if Local Group Exists",
+                "desc": "Verifies the existence of a specific local group",
+                "code": "exists local group \"Administrators\""
+            },
+            {
+                "title": "User Profile & SID Mapping",
+                "desc": "SIDs resolved to names and profile home directory locations",
+                "code": "(name of it | \"None\", sid of it as string | \"None\", account name of sid of it | \"None\", domain name of sid of it | \"None\", home directory of it | \"None\") of local users"
+            },
+            {
+                "title": "Local Group Integrity",
+                "desc": "Audit of all members within the local Administrators group",
+                "code": "(if (exists local group \"Administrators\") then (concatenation \" || \" of (it as string) of members of local group \"Administrators\") else \"None\")"
+            }
+        ],
+        "Data Parsing (JSON & XML)": [
+            {
+                "title": "Simple JSON Key Extraction",
+                "desc": "Pulls a single value from a JSON payload",
+                "code": "value of key \"user\" of json of \"%7b%22user%22:%22admin%22%7d\""
+            },
+            {
+                "title": "Simple XML Node Value",
+                "desc": "Retrieves text from a basic XML node",
+                "code": "node value of xpath \"/root/item/text()\" of xml document of \"<root><item>test</item></root>\""
+            },
+            {
+                "title": "JSON Array & Key Extraction",
+                "desc": "Safe extraction of keys and elements from structured JSON strings",
+                "code": "(value of key \"user\" of it as string | \"None\", concatenation \" || \" of (elements of (value of key \"roles\" of it) as string)) of json of \"%7b%22user%22:%22admin%22,%22roles%22:[1,2,3]%7d\""
+            },
+            {
+                "title": "XML Document Forensics",
+                "desc": "Using XPaths to retrieve node values and attribute data",
+                "code": "(node value of xpaths (\"/config/user/text()\") of it | \"None\", node value of xpaths (\"/config/@active\") of it | \"None\") of xml document of \"<config active=%22true%22><user>admin</user></config>\""
+            }
+        ],
+        "Advanced Logic": [
+            {
+                "title": "Basic If-Then-Else",
+                "desc": "A simple conditional check",
+                "code": "if (exists drive \"C:\") then \"Yes\" else \"No\""
+            },
+            {
+                "title": "Simple Concatenation",
+                "desc": "Combines a list of results into a single comma-separated string",
+                "code": "concatenation \", \" of names of processes"
+            },
+            {
+                "title": "1024-Char Output Chunking",
+                "desc": "Splits large relevance results into 1024-character chunks for console compatibility",
+                "code": "(if length of it >= 1024 then firsts 1024 of it else it) of (it & following text of it) of characters whose (start of it mod 1024 = 0) of (\"Large_Data_String\")"
+            },
+            {
+                "title": "Dynamic JSON Construction",
+                "desc": "Generates a formatted JSON string directly via Relevance logic",
+                "code": "\"{\" & \"%22OS%22:%22\" & (name of operating system | \"Unknown\") & \"%22, %22RAM_MB%22:\" & (size of ram / (1024*1024)) as string & \"}\""
+            }
+        ]
+    },
+    "Session Relevance": {},
+    "Action Script": {}
+}
