@@ -1,0 +1,140 @@
+BigFix Ops Studio
+Copyright 2026 HCL Technologies Limited
+
+This product is licensed under the Apache License, Version 2.0.
+You may obtain a copy of the License at:
+    http://www.apache.org/licenses/LICENSE-2.0
+
+=========================================================================
+THIRD-PARTY NOTICES
+=========================================================================
+
+This software includes components from the following third-party projects.
+Each component is subject to its own license terms as described below.
+
+-------------------------------------------------------------------------
+1. ChromaDB (chromadb v1.5.5)
+   License: Apache License 2.0
+   Homepage: https://github.com/chroma-core/chroma
+   Copyright: Copyright (c) 2022 Chroma Core Inc.
+
+-------------------------------------------------------------------------
+2. Requests (requests v2.33.1)
+   License: Apache License 2.0
+   Homepage: https://github.com/psf/requests
+   Copyright: Copyright (c) 2019 Kenneth Reitz
+
+-------------------------------------------------------------------------
+3. Tokenizers (tokenizers v0.21.0)
+   License: Apache License 2.0
+   Homepage: https://github.com/huggingface/tokenizers
+   Copyright: Copyright (c) 2019-present, the HuggingFace team
+
+-------------------------------------------------------------------------
+4. ONNX (onnx v1.21.0)
+   License: Apache License 2.0
+   Homepage: https://github.com/onnx/onnx
+   Copyright: Copyright (c) ONNX Project Contributors
+
+-------------------------------------------------------------------------
+5. ONNX Runtime (onnxruntime v1.21.0)
+   License: MIT License
+   Homepage: https://github.com/microsoft/onnxruntime
+   Copyright: Copyright (c) Microsoft Corporation
+
+   Permission is hereby granted, free of charge, to any person obtaining
+   a copy of this software and associated documentation files (the
+   "Software"), to deal in the Software without restriction, including
+   without limitation the rights to use, copy, modify, merge, publish,
+   distribute, sublicense, and/or sell copies of the Software, and to
+   permit persons to whom the Software is furnished to do so, subject to
+   the following conditions:
+
+   The above copyright notice and this permission notice shall be
+   included in all copies or substantial portions of the Software.
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+   EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+   MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+   IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+   CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+   TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+   SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+-------------------------------------------------------------------------
+6. OpenAI Python SDK (openai v2.30.0)
+   License: Apache License 2.0
+   Homepage: https://github.com/openai/openai-python
+   Copyright: Copyright (c) OpenAI
+
+-------------------------------------------------------------------------
+7. Anthropic Python SDK (anthropic v0.89.0)
+   License: MIT License
+   Homepage: https://github.com/anthropics/anthropic-sdk-python
+   Copyright: Copyright (c) Anthropic
+
+-------------------------------------------------------------------------
+8. Groq Python SDK (groq v1.1.2)
+   License: Apache License 2.0
+   Homepage: https://github.com/groq/groq-python
+   Copyright: Copyright (c) Groq, Inc.
+
+-------------------------------------------------------------------------
+9. Google GenAI Python SDK (google-genai >= 1.70.0)
+   License: Apache License 2.0
+   Homepage: https://github.com/googleapis/python-genai
+   Copyright: Copyright (c) Google LLC
+
+-------------------------------------------------------------------------
+10. Cryptography (cryptography v46.0.6)
+    License: Apache License 2.0 / BSD License (dual-licensed)
+    Homepage: https://github.com/pyca/cryptography
+    Copyright: Copyright (c) Individual contributors
+
+-------------------------------------------------------------------------
+11. NumPy (numpy v2.4.4)
+    License: BSD 3-Clause License
+    Homepage: https://github.com/numpy/numpy
+    Copyright: Copyright (c) 2005-2024, NumPy Developers
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+      * Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+      * Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in
+        the documentation and/or other materials provided with the
+        distribution.
+      * Neither the name of the NumPy Developers nor the names of any
+        contributors may be used to endorse or promote products derived
+        from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+    A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+    OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-------------------------------------------------------------------------
+12. Electron (electron v33.x)
+    License: MIT License
+    Homepage: https://github.com/electron/electron
+    Copyright: Copyright (c) Electron contributors
+               Copyright (c) 2013-2020 GitHub Inc.
+
+-------------------------------------------------------------------------
+13. electron-builder (electron-builder v25.x)
+    License: MIT License
+    Homepage: https://github.com/electron-userland/electron-builder
+    Copyright: Copyright (c) 2015 Loopline Systems
+
+=========================================================================
+END OF THIRD-PARTY NOTICES
+=========================================================================
